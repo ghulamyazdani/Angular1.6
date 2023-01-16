@@ -17,13 +17,145 @@
     ></script>
     <script src="scripts/script.js"></script>
     <title>Document</title>
+    <link rel="stylesheet" href="styles/style.css" />
   </head>
-  <body>
-    <div ng-controller="MessageController">
-      <p>Company Name ={{experiences.name}}</p>
-      <p>Experience ={{experiences.months}}</p>
-      <p>Description ={{experiences.description}}</p>
+  <body ng-controller="Countries">
+    <!-- <div>
+      <p>Country Name ={{countries.name}}</p>
+      <p>Description ={{countries.description}}</p>
+      <img ng-src="{{countries.src}}" alt="{{countries.name}}" />
+      <input type="text" ng-model="greeting" />
+      <br />
+      {{countries.message}} {{greeting}}
+    </div> -->
+    <div>
+      <table>
+        <tr>
+          <td>FirstName</td>
+          <td><input type="text" ng-model="citizens.firstName" /></td>
+        </tr>
+        <tr>
+          <td>LastName</td>
+          <td><input type="text" ng-model="citizens.lastName" /></td>
+        </tr>
+        <tr>
+          <td>Nationality</td>
+          <td><input type="text" ng-model="citizens.nationality" /></td>
+        </tr>
+      </table>
+      <table>
+        <tr>
+          <td>FirstName</td>
+          <td>{{citizens.firstName}}</td>
+        </tr>
+        <tr>
+          <td>LastName</td>
+          <td>{{citizens.lastName}}</td>
+        </tr>
+        <tr>
+          <td>Nationality</td>
+          <td>{{citizens.nationality}}</td>
+        </tr>
+      </table>
     </div>
-    <div>{{['sara','hellow',"cool"][2]}}</div>
+    <!-- <div>{{['sara','hellow',"cool"][2]}}</div> -->
+    <br />
+    <!-- <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>City</th>
+          <th>State</th>
+        </tr>
+      </thead>
+      <tr ng-repeat="company in companies">
+        <td>{{company.name}}</td>
+        <td>{{company.city}}</td>
+        <td>{{company.state}}</td>
+      </tr>
+    </table> -->
+    <!-- <div>
+      <ol>
+        <li ng-repeat="country in countries">
+          {{country.name}}- Index = {{$index}}
+          <ul>
+            <li ng-repeat="city in country.cities">
+              {{city.name}} -parentIndex ={{$parent.$index}} - Index =
+              {{$index}}
+            </li>
+          </ul>
+        </li>
+      </ol>
+    </div> -->
+
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Likes</th>
+          <th>Dislikes</th>
+          <th>Update</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="tech in technologies">
+          <td>{{tech.name}}</td>
+          <td>{{tech.likes}}</td>
+          <td>{{tech.dislikes}}</td>
+          <td>
+            <input type="button" value="Like" ng-click="incrementLikes(tech)" />
+            <input
+              type="button"
+              value="Dislike"
+              ng-click="incrementDislikes(tech)"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div>
+      Rows to display :
+      <input type="number" step="1" ng-model="rowCount" max="5" min="0" />
+      <br /><br />
+      Sort By :
+      <select ng-model="sortColumn">
+        <option value="name">Name ASC</option>
+        <option value="+dateOfBirth">Date of Birth ASC</option>
+        <option value="+gender">Gender ASC</option>
+        <option value="-salary">Salary DESC</option>
+      </select>
+      <table>
+        <thead>
+          <tr>
+            <th ng-click="sortData('name')">
+              Name
+              <div ng-class="getSortClass('name')"></div>
+            </th>
+            <th ng-click="sortData('dateOfBirth')">
+              Date of Birth
+              <div ng-class="getSortClass('dateOfBirth')"></div>
+            </th>
+            <th ng-click="sortData('gender')">
+              Gender
+              <div ng-class="getSortClass('gender')"></div>
+            </th>
+            <th ng-click="sortData('salary')">
+              Salary
+              <div ng-class="getSortClass('salary')"></div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            ng-repeat="employee in employees | orderBy:sortColumn:reverseSort | limitTo:rowCount"
+          >
+            <td>{{ employee.name | uppercase }}</td>
+            <td>{{ employee.dateOfBirth | date:"dd/MM/yyyy" }}</td>
+            <td>{{ employee.gender }}</td>
+            <td>{{ employee.salary }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </body>
 </html>
